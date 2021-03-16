@@ -27,3 +27,6 @@ ul>li:last-child {
   font-weight: bold;
 }
 
+table th {
+  padding: 15px;
+}
