@@ -1,63 +1,24 @@
 
 // Store Location Objects
 
-const seattle = {
-  // declare min and max customers possible and average cookie order
-  minCustomer: 23,
-  maxCustomer: 65,
-  avgCookieOrder: 6.3,
-  location: 'Seattle',
-  hourlySales: [],
+function CreateStore(location, minCus, maxCus, avgCookieOrder) {
+  this.location = location;
+  this.minCus = minCus;
+  this.maxCus = maxCus;
+  this.avgCookieOrder = avgCookieOrder;
+  this.hourlySales = [];
+}
 
-  // calculate a random number between min and max
-  customerNumberGenerator: function () {
-    return parseInt(Math.random() * (this.maxCustomer-this.minCustomer) + this.minCustomer);
-  }
-};
+let seattle = new CreateStore('Seattle', 23, 65, 6.3);
+let tokyo = new CreateStore('Tokyo', 3, 24, 1.2);
+let dubai = new CreateStore('Dubai', 11, 38, 1.7);
+let paris = new CreateStore('Paris', 20, 38, 2.3);
+let lima = new CreateStore('Lima', 2, 16, 4.6);
 
-const tokyo = {
-  minCustomer: 3,
-  maxCustomer: 24,
-  avgCookieOrder: 1.2,
-  location: 'Tokyo',
-  hourlySales: [],
-  customerNumberGenerator: function () {
-    return parseInt(Math.random() * (this.maxCustomer-this.minCustomer) + this.minCustomer);
-  }
-};
 
-const dubai = {
-  minCustomer: 11,
-  maxCustomer: 38,
-  avgCookieOrder: 3.7,
-  location: 'Dubai',
-  hourlySales: [],
-  customerNumberGenerator: function () {
-    return parseInt(Math.random() * (this.maxCustomer-this.minCustomer) + this.minCustomer);
-  }
-};
 
-const paris = {
-  minCustomer: 20,
-  maxCustomer: 38,
-  avgCookieOrder: 2.3,
-  location: 'Paris',
-  hourlySales: [],
-  customerNumberGenerator: function () {
-    return parseInt(Math.random() * (this.maxCustomer-this.minCustomer) + this.minCustomer);
-  }
-};
 
-const lima = {
-  minCustomer: 2,
-  maxCustomer: 16,
-  avgCookieOrder: 4.6,
-  location: 'Lima',
-  hourlySales: [],
-  customerNumberGenerator: function () {
-    return parseInt(Math.random() * (this.maxCustomer-this.minCustomer) + this.minCustomer);
-  }
-};
+
 
 
 // Hour Array?
@@ -117,6 +78,14 @@ function renderCookieStore(store) {
   list.appendChild(totalCount);
   totalCount.textContent = `Total: ${total.toLocaleString()} cookies`;
 }
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+
 
 renderCookieStore(seattle);
 renderCookieStore(tokyo);
