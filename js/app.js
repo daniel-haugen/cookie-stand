@@ -1,4 +1,4 @@
-
+'use strict';
 // Store constructor function
 
 function CreateStore(location, minCus, maxCus, avgCookieOrder) {
@@ -37,10 +37,20 @@ let hours = [
 
 // Function to create a section for a store.
 
-CreateStore.prototype.render() {
+CreateStore.prototype.render = function() {
+  const storeContainer = document.getElementById('store-ctr');
 
-}
+  console.log(storeContainer);
+  const section = createEl('section', storeContainer);
 
+
+  // createElement('h2', section, store.location);
+
+
+
+};
+
+seattle.render();
 
 // function renderCookieStore(store) {
 //   // grab store container
@@ -96,11 +106,12 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function createElement (tag, parent, text) {
-  const child = createElement(tag);
+function createEl (tag, parent, text) {
+  const child = document.createElement(tag);
   parent.appendChild(child);
   if (text !== undefined) {
     child.textContent = text;
   }
   return child;
 }
+
