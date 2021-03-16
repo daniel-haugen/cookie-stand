@@ -1,5 +1,4 @@
 
-
 // Store Location Objects
 
 const seattle = {
@@ -16,13 +15,10 @@ const seattle = {
   }
 };
 
-// parseInt(store.avgCookieOrder);
-console.log(seattle.customerNumberGenerator());
-
 const tokyo = {
-  minCustomer: '23',
-  maxCustomer: '65',
-  avgCookieOrder: '6.3',
+  minCustomer: '3',
+  maxCustomer: '24',
+  avgCookieOrder: '1.2',
   location: 'Tokyo',
   hourlySales: [],
   customerNumberGenerator: function () {
@@ -49,13 +45,10 @@ let hours = [
   '7pm'
 ];
 
-
-// grab store container
-const storeContainer = document.getElementById('store-ctr');
-
-
-
-function renderCookieSection(store) {
+// Function to create a section for a store.
+function renderCookieStore(store) {
+  // grab store container
+  const storeContainer = document.getElementById('store-ctr');
 
   // render section element
   const section = document.createElement('section');
@@ -78,14 +71,10 @@ function renderCookieSection(store) {
     listItem.textContent = `${hours[i]}: ${hourlySales} cookies`;
     list.appendChild(listItem);
   }
-
-
-
 }
 
-renderCookieSection(seattle);
-
-renderCookieSection(tokyo);
+renderCookieStore(seattle);
+renderCookieStore(tokyo);
 
 
 
