@@ -111,7 +111,7 @@ function renderCookieStore(store) {
   for (let k = 0; k<store.hourlySales.length; k++) {
     total += store.hourlySales[k];
   }
-  
+
   // render total sales to list
   const totalCount = document.createElement('li');
   list.appendChild(totalCount);
