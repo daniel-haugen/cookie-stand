@@ -1,5 +1,5 @@
 
-// Store Location Objects
+// Store constructor function
 
 function CreateStore(location, minCus, maxCus, avgCookieOrder) {
   this.location = location;
@@ -9,6 +9,7 @@ function CreateStore(location, minCus, maxCus, avgCookieOrder) {
   this.hourlySales = [];
 }
 
+// Created Store objects
 let seattle = new CreateStore('Seattle', 23, 65, 6.3);
 let tokyo = new CreateStore('Tokyo', 3, 24, 1.2);
 let dubai = new CreateStore('Dubai', 11, 38, 1.7);
@@ -16,13 +17,7 @@ let paris = new CreateStore('Paris', 20, 38, 2.3);
 let lima = new CreateStore('Lima', 2, 16, 4.6);
 
 
-
-
-
-
-
 // Hour Array?
-
 let hours = [
   '6am',
   '7am',
@@ -41,43 +36,59 @@ let hours = [
 ];
 
 // Function to create a section for a store.
-function renderCookieStore(store) {
-  // grab store container
-  const storeContainer = document.getElementById('store-ctr');
 
-  // render section element
-  const section = document.createElement('section');
-  section.id = store.location;
-  storeContainer.appendChild(section);
+CreateStore.prototype.render() {
 
-  // render heading
-  const heading = document.createElement('h3');
-  heading.textContent = store.location;
-  section.appendChild(heading);
-
-  // render the ul element
-  const list = document.createElement('ul');
-  section.appendChild(list);
-
-  // render li for every hour in array
-  for (let i = 0; i < hours.length; i++) {
-    const listItem = document.createElement('li');
-    store.hourlySales.push(Math.round((store.avgCookieOrder) * store.customerNumberGenerator()));
-    listItem.textContent = `${hours[i]}: ${store.hourlySales[i]} cookies`;
-    list.appendChild(listItem);
-  }
-
-  // sum up the total sales
-  let total = 0;
-  for (let k = 0; k<store.hourlySales.length; k++) {
-    total += store.hourlySales[k];
-  }
-
-  // render total sales to list
-  const totalCount = document.createElement('li');
-  list.appendChild(totalCount);
-  totalCount.textContent = `Total: ${total.toLocaleString()} cookies`;
 }
+
+
+// function renderCookieStore(store) {
+//   // grab store container
+//   const storeContainer = document.getElementById('store-ctr');
+
+//   // render section element
+//   const section = document.createElement('section');
+//   section.id = store.location;
+//   storeContainer.appendChild(section);
+
+//   // render heading
+//   const heading = document.createElement('h3');
+//   heading.textContent = store.location;
+//   section.appendChild(heading);
+
+//   // render the ul element
+//   const list = document.createElement('ul');
+//   section.appendChild(list);
+
+//   // render li for every hour in array
+//   for (let i = 0; i < hours.length; i++) {
+//     const listItem = document.createElement('li');
+//     store.hourlySales.push(Math.round((store.avgCookieOrder) * getRandomInt(store.minCus, store.maxCus)));
+//     listItem.textContent = `${hours[i]}: ${store.hourlySales[i]} cookies`;
+//     list.appendChild(listItem);
+//   }
+
+//   // sum up the total sales
+//   let total = 0;
+//   for (let k = 0; k<store.hourlySales.length; k++) {
+//     total += store.hourlySales[k];
+//   }
+
+//   // render total sales to list
+//   const totalCount = document.createElement('li');
+//   list.appendChild(totalCount);
+//   totalCount.textContent = `Total: ${total.toLocaleString()} cookies`;
+// }
+
+
+
+// renderCookieStore(seattle);
+// renderCookieStore(tokyo);
+// renderCookieStore(dubai);
+// renderCookieStore(paris);
+// renderCookieStore(lima);
+
+
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -85,14 +96,11 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-
-
-renderCookieStore(seattle);
-renderCookieStore(tokyo);
-renderCookieStore(dubai);
-renderCookieStore(paris);
-renderCookieStore(lima);
-
-
-
-
+function createElement (tag, parent, text) {
+  const child = createElement(tag);
+  parent.appendChild(child);
+  if (text !== undefined) {
+    child.textContent = text;
+  }
+  return child;
+}
