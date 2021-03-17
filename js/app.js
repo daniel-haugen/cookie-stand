@@ -93,10 +93,7 @@ function createTableFooter() {
   for (let i = 0; i < hourlySum.length; i++){
     createEl('td', tfooter, hourlySum[i]);
   }
-  // // render out the bottom row totals
-  for (let i = 0; i < hourlySum; i++){
-    createEl('td', tfooter, hourlySum[i]);
-  }
+
   // render the grand total..
   createEl('td', tfooter, grandTotal.toLocaleString());
 
