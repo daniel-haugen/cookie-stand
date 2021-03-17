@@ -27,6 +27,17 @@ ul>li:last-child {
   font-weight: bold;
 }
 
+table {
+  border: 1px solid black;
+}
+
 table th {
   padding: 15px;
+  border: 1px solid black;
 }
+
+table td {
+  border: 1px solid black;
+  text-align: center;
+}
+
