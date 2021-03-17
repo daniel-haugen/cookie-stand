@@ -1,20 +1,25 @@
 'use strict';
 // Define Store constructor function
 
-function CreateStore(location, minCus, maxCus, avgCookieOrder) {
+Store.allStores = [];
+
+function Store(location, minCus, maxCus, avgCookieOrder) {
   this.location = location;
   this.minCus = minCus;
   this.maxCus = maxCus;
   this.avgCookieOrder = avgCookieOrder;
   this.hourlySales = [];
+  Store.allStores.push(this);
 }
 
 // Create Store objects
-let seattle = new CreateStore('Seattle', 23, 65, 6.3);
-let tokyo = new CreateStore('Tokyo', 3, 24, 1.2);
-let dubai = new CreateStore('Dubai', 11, 38, 1.7);
-let paris = new CreateStore('Paris', 20, 38, 2.3);
-let lima = new CreateStore('Lima', 2, 16, 4.6);
+let seattle = new Store('Seattle', 23, 65, 6.3);
+let tokyo = new Store('Tokyo', 3, 24, 1.2);
+let dubai = new Store('Dubai', 11, 38, 1.7);
+let paris = new Store('Paris', 20, 38, 2.3);
+let lima = new Store('Lima', 2, 16, 4.6);
+
+console.log(Store.allStores);
 
 
 // Hour Array
@@ -35,24 +40,25 @@ let hours = [
   '7pm'
 ];
 
-// Create the Table structure
-
-const storeContainer = document.getElementById('store-ctr');
-const section = createEl('section', storeContainer);
-const table = createEl('table', section);
-const topHeadingRow = createEl('tr', table);
-createEl('th', topHeadingRow);
-for (let i = 0; i < hours.length; i++) {
-  createEl('th', topHeadingRow, hours[i]);
-
+// Create the Table Header
+function createTableHeader() {
+  const storeContainer = document.getElementById('store-ctr');
+  const table = createEl('table', storeContainer);
+  const thead = createEl('thead', table);
+  const theadRow = createEl('tr', thead);
+  createEl('th', theadRow);
+  for (let i = 0; i < hours.length; i++) {
+    createEl('th', theadRow, hours[i]);
+  }
+  createEl('th', theadRow, 'Daily Location Total');
+  createEl('tbody', table);
 }
-const dailyLocationTotal = createEl('th', topHeadingRow, 'Daily Location Total');
 
-
-// render method for objects
-CreateStore.prototype.render = function() {
-  const locationRow = createEl('tr', table);
-  const locationRowHeading = createEl('th', locationRow, this.location);
+// RENDER METHOD For Each Store
+Store.prototype.render = function() {
+  const t = document.querySelector('table>tbody');
+  const locationRow = createEl('tr', t);
+  createEl('th', locationRow, this.location);
   let total = 0;
 
   // load up the object's hourly sales with random numbers
@@ -66,13 +72,56 @@ CreateStore.prototype.render = function() {
   createEl('td', locationRow, total.toLocaleString());
 };
 
+// Create Table footer
+function createTableFooter() {
+  const table = document.getElementsByTagName('table')[0];
+  const tfooter = createEl('tfoot', table);
+  const footHeader = createEl('th', tfooter, 'Total');
+  let hourlySum = [];
+  let htotal = 0;
+  
+  function hourlyTotal(a,b,c,d,e) {
+    for (let k = 0; k < hours.length; k++){
+      htotal += a.hourlySales[k] + b.hourlySales[k] + c.hourlySales[k] + d.hourlySales[k] + e.hourlySales[k];
+      hourlySum.push(htotal);
+      htotal = 0;
+    }
+  }
+  hourlyTotal(seattle, tokyo, dubai, paris, lima);
+
+  for (let i = 0; i < hourlySum; i++){
+    createEl('td', tfooter, hourlySum[i]);
+}
+
+
+
+
+// // just sum one row....
+  for (let i = 0; i < hourlySum; i++){
+    createEl('td', tfooter, hourlySum[i]);
+  }}
+
+
+
+
+
+
+
+// CAALLLLSSS
+createTableHeader();
 seattle.render();
 tokyo.render();
 dubai.render();
 paris.render();
 lima.render();
+createTableFooter();
 
 
+
+
+
+
+// support functions
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -88,4 +137,5 @@ function createEl (tag, parent, text) {
   }
   return child;
 }
+
 
