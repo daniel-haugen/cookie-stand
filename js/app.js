@@ -1,15 +1,12 @@
 'use strict';
 // Define Store constructor function
 
-Store.allStores = [];
-
 function Store(location, minCus, maxCus, avgCookieOrder) {
   this.location = location;
   this.minCus = minCus;
   this.maxCus = maxCus;
   this.avgCookieOrder = avgCookieOrder;
   this.hourlySales = [];
-  Store.allStores.push(this);
 }
 
 // Create Store objects
@@ -18,9 +15,6 @@ let tokyo = new Store('Tokyo', 3, 24, 1.2);
 let dubai = new Store('Dubai', 11, 38, 1.7);
 let paris = new Store('Paris', 20, 38, 2.3);
 let lima = new Store('Lima', 2, 16, 4.6);
-
-console.log(Store.allStores);
-
 
 // Hour Array
 let hours = [
@@ -40,7 +34,7 @@ let hours = [
   '7pm'
 ];
 
-// Create the Table Header
+// function to create the Table Header
 function createTableHeader() {
   const storeContainer = document.getElementById('store-ctr');
   const table = createEl('table', storeContainer);
@@ -72,14 +66,14 @@ Store.prototype.render = function() {
   createEl('td', locationRow, total.toLocaleString());
 };
 
-// Create Table footer
+// function to create Table Footer
 function createTableFooter() {
   const table = document.getElementsByTagName('table')[0];
   const tfooter = createEl('tfoot', table);
-  const footHeader = createEl('th', tfooter, 'Total');
+  createEl('th', tfooter, 'Total');
   let hourlySum = [];
   let htotal = 0;
-  
+
   function hourlyTotal(a,b,c,d,e) {
     for (let k = 0; k < hours.length; k++){
       htotal += a.hourlySales[k] + b.hourlySales[k] + c.hourlySales[k] + d.hourlySales[k] + e.hourlySales[k];
@@ -89,21 +83,15 @@ function createTableFooter() {
   }
   hourlyTotal(seattle, tokyo, dubai, paris, lima);
 
-  for (let i = 0; i < hourlySum; i++){
+  console.log(hourlySum);
+
+  for (let i = 0; i < hourlySum.length; i++){
     createEl('td', tfooter, hourlySum[i]);
-}
-
-
-
-
-// // just sum one row....
+  }
+  // // render out the bottom row totals
   for (let i = 0; i < hourlySum; i++){
     createEl('td', tfooter, hourlySum[i]);
   }}
-
-
-
-
 
 
 
@@ -116,13 +104,7 @@ paris.render();
 lima.render();
 createTableFooter();
 
-
-
-
-
-
 // support functions
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
