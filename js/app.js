@@ -34,6 +34,9 @@ let hours = [
   '7pm'
 ];
 
+//Grand Total Init
+let grandTotal = 0;
+
 // function to create the Table Header
 function createTableHeader() {
   const storeContainer = document.getElementById('store-ctr');
@@ -63,7 +66,9 @@ Store.prototype.render = function() {
     createEl('td', locationRow, this.hourlySales[j]);
     total += this.hourlySales[j];
   }
+
   createEl('td', locationRow, total.toLocaleString());
+  grandTotal += total;
 };
 
 // function to create Table Footer
@@ -91,9 +96,11 @@ function createTableFooter() {
   // // render out the bottom row totals
   for (let i = 0; i < hourlySum; i++){
     createEl('td', tfooter, hourlySum[i]);
-  }}
+  }
+  // render the grand total..
+  createEl('td', tfooter, grandTotal.toLocaleString());
 
-
+}
 
 // CAALLLLSSS
 createTableHeader();
@@ -119,5 +126,3 @@ function createEl (tag, parent, text) {
   }
   return child;
 }
-
-
