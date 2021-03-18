@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
+
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ramabhadra;
   line-height: 1.5;
   margin-left: 5%;
+  width: 100%;
 }
 
 h1{
-  font-size: 2em;
+  font-size: 3.5em;
   font-weight: bold;
   margin-top: 10px;
+  color: #F06565;
 }
 
 h2 {
@@ -40,4 +45,22 @@ table td {
   border: 1px solid black;
   text-align: center;
 }
+
+.hero>img {
+  transform:scaleX(-1);
+  width: 2000px;
+  position: relative;
+  left: 400px;
+}
+
+header {
+  display: flex;
+}
+
+nav>ul {
+  display: flex;
+}
+
+
+
 
