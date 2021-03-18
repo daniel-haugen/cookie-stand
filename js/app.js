@@ -38,6 +38,7 @@ let hours = [
 const allStores = [];
 const storeContainer = document.getElementById('store-ctr');
 let hourlySum = [];
+let grandTotal = 0;
 
 
 // Define Store constructor function
@@ -54,16 +55,11 @@ function Store(location, minCus, maxCus, avgCookieOrder) {
 }
 
 // Create Store objects
-let seattle = new Store('Seattle', 23, 65, 6.3);
-let tokyo = new Store('Tokyo', 3, 24, 1.2);
-let dubai = new Store('Dubai', 11, 38, 1.7);
-let paris = new Store('Paris', 20, 38, 2.3);
-let lima = new Store('Lima', 2, 16, 4.6);
-
-console.log(allStores);
-
-//Grand Total Init
-let grandTotal = 0;
+new Store('Seattle', 23, 65, 6.3);
+new Store('Tokyo', 3, 24, 1.2);
+new Store('Dubai', 11, 38, 1.7);
+new Store('Paris', 20, 38, 2.3);
+new Store('Lima', 2, 16, 4.6);
 
 // function to create the Table Header
 function createTableHeader() {
@@ -94,10 +90,9 @@ Store.prototype.render = function() {
   grandTotal += total;
 };
 
-
-
-
+// Function to fill the hourly sum array with hourly totals across all stores.
 function hourlyTotal(allStores) {
+  hourlySum = [];
   for (let i = 0; i < hours.length; i++) { // we hit 6 am.
     let htotal = 0;
     for(let k = 0; k < allStores.length; k++){
@@ -106,16 +101,14 @@ function hourlyTotal(allStores) {
     hourlySum.push(htotal);}
   return hourlySum;
 }
-hourlyTotal(allStores);
-
-
+// hourlyTotal(allStores);
+console.log(hourlySum);
 
 // function to create Table Footer
 function createTableFooter() {
   const table = document.getElementsByTagName('table')[0];
   const tfooter = createEl('tfoot', table);
   createEl('th', tfooter, 'Total');
-
 
   // RENDER EACH HOURLY SUM ACROSS ALL STORES
   for (let i = 0; i < hourlySum.length; i++){
@@ -124,18 +117,51 @@ function createTableFooter() {
 
   // render the grand total..
   createEl('td', tfooter, grandTotal.toLocaleString());
+}
+
+function renderTable() {
+  createTableHeader();
+  for (let i = 0; i < allStores.length; i++) {
+    allStores[i].render();
+  }
+  hourlyTotal(allStores);
+  createTableFooter();
+  
 
 }
 
+function submitNewStore(event) {
+  event.preventDefault();
+  let city = event.target.location.value;
+  let minC = event.target.minC.value;
+  let maxC = event.target.maxC.value;
+  let avgOrder = event.target.avgOrder.value;
+
+  for (let k = 0; k < allStores.length; k++)
+    if (city === allStores[k].location) {
+      allStores[k].minCus = minC;
+      allStores[k].maxCus = maxC;
+      allStores[k].avgCookieOrder = avgOrder;
+      allStores[k].hourlySales = [];
+      for(let j = 0; j < hours.length; j++){
+        allStores[k].hourlySales.push(Math.round((allStores[k].avgCookieOrder) * getRandomInt(allStores[k].minCus, allStores[k].maxCus)));
+      }
+      storeContainer.innerHTML = '';
+      console.log(allStores[0]);
+      renderTable();
+      return;
+    }
+
+  new Store(city, minC, maxC, avgOrder);
+  storeContainer.innerHTML = '';
+  renderTable();
+  event.target.reset();
+}
+
+const form = document.getElementById('form');
+form.addEventListener('submit', submitNewStore);
+
 // CAALLLLSSS
-createTableHeader();
-seattle.render();
-tokyo.render();
-dubai.render();
-paris.render();
-lima.render();
-createTableFooter();
-
-
+renderTable();
 
 
