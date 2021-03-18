@@ -88,7 +88,6 @@ function createTableFooter() {
   }
   hourlyTotal(seattle, tokyo, dubai, paris, lima);
 
-  console.log(hourlySum);
 
   for (let i = 0; i < hourlySum.length; i++){
     createEl('td', tfooter, hourlySum[i]);
