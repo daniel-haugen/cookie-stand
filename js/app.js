@@ -54,12 +54,14 @@ function Store(location, minCus, maxCus, avgCookieOrder) {
   }
 }
 
+
 // Create Store objects
 new Store('Seattle', 23, 65, 6.3);
 new Store('Tokyo', 3, 24, 1.2);
 new Store('Dubai', 11, 38, 1.7);
 new Store('Paris', 20, 38, 2.3);
 new Store('Lima', 2, 16, 4.6);
+
 
 // function to create the Table Header
 function createTableHeader() {
@@ -80,7 +82,6 @@ Store.prototype.render = function() {
   const locationRow = createEl('tr', t);
   createEl('th', locationRow, this.location);
   let total = 0;
-
   for(let j = 0; j < this.hourlySales.length; j++) {
     createEl('td', locationRow, this.hourlySales[j]);
     total += this.hourlySales[j];
@@ -89,6 +90,7 @@ Store.prototype.render = function() {
   createEl('td', locationRow, total.toLocaleString());
   grandTotal += total;
 };
+
 
 // Function to fill the hourly sum array with hourly totals across all stores.
 function hourlyTotal(allStores) {
@@ -101,23 +103,21 @@ function hourlyTotal(allStores) {
     hourlySum.push(htotal);}
   return hourlySum;
 }
-// hourlyTotal(allStores);
-console.log(hourlySum);
+
 
 // function to create Table Footer
 function createTableFooter() {
   const table = document.getElementsByTagName('table')[0];
   const tfooter = createEl('tfoot', table);
   createEl('th', tfooter, 'Total');
-
   // RENDER EACH HOURLY SUM ACROSS ALL STORES
   for (let i = 0; i < hourlySum.length; i++){
     createEl('td', tfooter, hourlySum[i]);
   }
-
   // render the grand total..
   createEl('td', tfooter, grandTotal.toLocaleString());
 }
+
 
 function renderTable() {
   createTableHeader();
@@ -126,9 +126,8 @@ function renderTable() {
   }
   hourlyTotal(allStores);
   createTableFooter();
-  
-
 }
+
 
 function submitNewStore(event) {
   event.preventDefault();
@@ -147,17 +146,16 @@ function submitNewStore(event) {
         allStores[k].hourlySales.push(Math.round((allStores[k].avgCookieOrder) * getRandomInt(allStores[k].minCus, allStores[k].maxCus)));
       }
       storeContainer.innerHTML = '';
-      console.log(allStores[0]);
       renderTable();
       return;
     }
-
   new Store(city, minC, maxC, avgOrder);
   storeContainer.innerHTML = '';
   renderTable();
   event.target.reset();
 }
 
+// Add event listener
 const form = document.getElementById('form');
 form.addEventListener('submit', submitNewStore);
 
