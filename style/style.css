@@ -117,12 +117,18 @@ nav>ul>a>li {
   justify-content: center;
   border: 8px solid black;
   z-index: 1;
+  transition: 400ms;
+}
+
+.hero>div>p {
+  transition: 400ms;
 }
 
 .hero>div:hover, .hero>div>p:hover {
- transform: scale(1.3);
- transition: 200ms;
+ transform: scale(1.08);
+ transition: 400ms;
  text-shadow: 2px 2px salmon;
+ text-decoration: underline;
 }
 
 .hero>div>p {
@@ -139,12 +145,6 @@ nav>ul>a>li {
   top: -150px;
   z-index: 4;
   transition: 200ms;
-}
-
-.hero>img:hover {
-  transform: scaleX(-1.01) scaleY(1.01);
- transition: 200ms;
-
 }
 
 
