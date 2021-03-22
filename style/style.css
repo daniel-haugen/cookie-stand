@@ -138,19 +138,37 @@ nav>ul>a>li {
   padding-top: 80px;
 }
 
+.locations>h2:before {
+  content: "- ";
+}
+
+.locations>h2:after {
+  content: " -";
+}
+
+
 .locations>ul {
   display: flex;
+  justify-content: space-around;
   background-color: lightcoral;
   width: 85%;
-  margin: 0 auto;
+  height: 200px;
+  margin: 20px auto;
 
 }
 
 .locations>ul>li {
-  padding: 5px;
-  margin: 0 5px;
+  width: 20%;
+  margin: 20px 5px;
   font-size: 2em;
-  background-color: lightcyan;
+  background-color: #CCE7FF;
+  display: grid;
+  place-items: center;
+}
+
+.locations>ul>li:hover {
+  background-color: white;
+  transition: 500ms;
 }
 
 
@@ -169,11 +187,27 @@ margin: 0 auto;
 position: relative;
 left: 20%;
 padding: 30px;
+border-radius: 40px;
 }
 
 .listings>p {
   font-size: 1.5em;
   line-height: 3;
+}
+.space {
+height: 60px;
+  background-color: #96715D;
+}
+
+footer {
+  background-color: black;
+  height: 100px;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 1.3em;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 
@@ -269,6 +303,12 @@ input[type=submit] {
   border-radius: 40px;
   margin-top: 20px;
   margin-bottom: 50px;
+}
+
+input[type=submit]:hover {
+  background-color: white;
+  transition: 500ms;
+ 
 }
 
 
