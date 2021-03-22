@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style/reset.css">
   <link rel="stylesheet" href="style/style.css">
-  
+
   <title>Salmon Cookies</title>
 
 </head>
 
 <body>
   <header>
-    <h1>Salmon Cookies</h1>
+    <a href="/"><h1>Salmon Cookies</h1></a>
     <nav>
       <ul>
-        <li>locations</li>
-        <li>sales</li>
-        <li>contact</li>
+        <a href="">
+          <li>locations</li>
+        </a>
+        <a href="sales.html">
+          <li>sales</li>
+        </a>
+        <a href="">
+          <li>contact</li>
+        </a>
       </ul>
     </nav>
   </header>
@@ -30,11 +37,9 @@
     <img src="img/salmon.png" alt="">
   </section>
 
-  <a href="sales.html">Sales Page</a>
-
-  <section>
+  <section class="locations">
     <h2>Store Locations</h2>
-    
+
     <ul>
       <li>Seattle</li>
       <li>Tokyo</li>
@@ -42,14 +47,21 @@
       <li>Lima</li>
       <li>Paris</li>
     </ul>
-
-    <h2>Hours</h2>
-    <p>Monday: 9am-5pm</p>
-    <p>Tuesday: 9am-5pm</p>
-    <p>Wednesday: 9am-5pm</p>
+  
+      <h2 class="hours">Hours</h2>
+      <div class="listings">
+        <p>Monday: 9am-5pm</p>
+        <p>Tuesday: 9am-5pm</p>
+        <p>Wednesday: 9am-5pm</p>
+      </div>
 
   </section>
 
-  
+  <footer>
+
+  </footer>
+
+
 </body>
+
 </html>
